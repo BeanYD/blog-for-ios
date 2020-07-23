@@ -92,13 +92,48 @@ NSLog(@"%@", task.progress.localizedDescription);
 NSLog(@"%@", task.progress.localizedAdditionalDescription);
 ```
 
+### 进行多路多协议的网络操作（Multipath Protocols for Mobile Devices）
 
+NSURLSessionConfiguration属性：
 
-
+```objective-c
+/* multipath service type to use for connections.  The default is NSURLSessionMultipathServiceTypeNone */
+@property NSURLSessionMultipathServiceType multipathServiceType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
+```
 
-------
+Handover Mode（高可靠模式）
 
-持续更新
+这种模式下优先考虑的是链接的可靠性。只有在Wi-Fi信号不好的时候，流量才会走Cellular。如果Wi-Fi信号好，但是Wi-Fi很慢，这时候也不会切到Cellular链路。
 
-------
+Interactive Mode（低延时模式）
+
+这种模式下优先考虑的是链接的低延时。系统会看Wi-Fi快还是Cellular快。如果Cellular比Wi-Fi快，哪怕此时Wi-Fi信号很好，系统也会把流量切到Cellular链路。
+
+Aggregation Mode（混合模式）
+
+在这种模式下，Wi-Fi和Cellular会同时起作用。如果Wi-Fi是1G带宽，Cellular也是1G带宽，那么你的设备就能享受2G带宽。无法在生产环境使用。
+
+### Network Extension Framework的新API
+
+两个新类：`NEHotSpotConfiguration`、`NEDNSProxyProvider`
+
+`NEHotSpotConfigutation`可以直接在app内进行热点的连接，不用切换到设置中去操作。
+
+```objective-c
+// 头文件包含
+#import <NetworkExtension/NEHotspotConfigurationManager.h>
+
+// 具体实现代码，其他接口阅读官方文档
+NEHotspotConfiguration *pwdConfig = [[NEHotspotConfiguration alloc] initWithSSID:@"wifi名称" passphrase:@"wifi密码" isWEP:NO];
+
+NEHotspotConfiguration *noPwdConfig = [[NEHotspotConfiguration alloc] initWithSSID:@"wifi名称"];
+		
+	
+[[NEHotspotConfigurationManager sharedManager] applyConfiguration:pwdConfig completionHandler:^(NSError * _Nullable error) {
+			
+	
+}];
+```
+
+`NEDNSProxyProvider`可以用来设置你的手机如何跟`DNS`做交互。你可以自己发`DNS`请求，也可以自己基于不同的协议去做`DNS`查询。例如`DNS over TLS`，`DNS over HTTP`。
 
