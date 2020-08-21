@@ -41,11 +41,11 @@ GeelyTravel[25638:1054131] [LayoutConstraints] Unable to simultaneously satisfy 
 )
 ```
 
-​	解决：直接在懒加载中调用initWithFrame:方法，并添加相应的frame值。
+​	可以直接在懒加载中调用initWithFrame:方法，并添加相应的frame值。
 
 ​	衍生问题：上述两个初始化方法中，我只在init中添加了configUI方法。在调用initWithFrame:时发现，无法进入configUI方法。	
 
-​	解决：在initWithFrame:中添加configUI。删除init方法
+​	在initWithFrame:中添加configUI。删除init方法
 
 ```objective-c
 // customView相关代码
