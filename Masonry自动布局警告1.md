@@ -13,8 +13,8 @@
 }
 - (instancetype)init {
     if (self = [super init]) {
-				[self configUI];
-		}
+	[self configUI];
+    }
     
     return self;
 }
