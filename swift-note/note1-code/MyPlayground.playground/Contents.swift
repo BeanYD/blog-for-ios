@@ -26,4 +26,30 @@ findNext(elm: findNext(elm: findNext(elm: stateItr())))
 /// `Collection`
 
 
+/**
+ `map()`的使用
+ */
 
+var cats = ["Tabby", "Snow", "Cycloman"]
+func wearHat(cat: String) -> String {
+    return cat + " wear hat "
+}
+
+let catsWithHat = cats.map(wearHat)
+
+/**
+ `flatMap()`
+ `reduce()`
+ `array`--> Array ArraySlice ContiguousArray
+ */
+
+/**
+ 弱引用:数组
+ */
+let strongArray = NSPointerArray.strongObjects()
+let weakArray = NSPointerArray.weakObjects()
+
+/**
+ 弱引用:Dictionary --> NSMapTable
+      Set --> NSHashTable
+ */
