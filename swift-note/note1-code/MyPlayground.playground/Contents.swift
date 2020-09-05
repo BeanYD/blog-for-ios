@@ -53,3 +53,6 @@ let weakArray = NSPointerArray.weakObjects()
  弱引用:Dictionary --> NSMapTable
       Set --> NSHashTable
  */
+
+//逃逸闭包
+//非逃逸闭包
